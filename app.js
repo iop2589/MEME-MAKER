@@ -13,6 +13,10 @@ const colorOption = Array.from(
 const fileInput = document.querySelector("#file");
 const CANVAS_WIDTH = 800;
 const CANVAS_HEIGHT = 800;
+const fontSize = document.querySelector("#fontSize");
+const fonts = document.querySelector("#fontList");
+const fontList = ["caption", "italic", "Tahoma"];
+
 
 let isFilling = false;
 
@@ -100,7 +104,6 @@ function onDoubleClick(event) {
     if (text !== "") {
         ctx.save();
         ctx.lineWidth = 1;
-        ctx.font = "68px serif";
         ctx.fillText(text, event.offsetX, event.offsetY);
         ctx.restore();
     }
@@ -114,12 +117,46 @@ function onSaveButtonClick (event) {
     a.click();
 }
 
+function onLoadDocument () {
+    onLoadFontList();
+    onLoadFontSize();
+}
+
+function onLoadFontList () {
+    fontList.forEach(font => {
+        let option = document.createElement("option");
+        option.value = font;
+        option.innerText = font;
+        fonts.options.add(option);
+    });
+}
+
+function onLoadFontSize() {
+    for (var i = 1; i <= 10; i++) {
+        let option = document.createElement("option");
+        option.value = i * 10;
+        option.innerText = i * 10;
+        fontSize.options.add(option);
+    }
+}
+
+function onChangeFontSize () {
+    ctx.font = `${fontSize.value}px ${fonts.value}`;
+}
+
+function onChangeFont () {
+    ctx.font = `${fontSize.value}px ${fonts.value}`;
+}
+
 canvas.addEventListener("dblclick", onDoubleClick);
 canvas.addEventListener("mousemove", onMove);
 canvas.addEventListener("mousedown", onMouseDown);
 canvas.addEventListener("mouseup", cancelPaintings);
 canvas.addEventListener("mouseleave", cancelPaintings);
 canvas.addEventListener("click", onCanvasClick);
+document.addEventListener("DOMContentLoaded", onLoadDocument);
+fontSize.addEventListener("change", onChangeFontSize);
+fonts.addEventListener("change", onChangeFont);
 
 lineWidth.addEventListener("change", onLineWidthChange);
 color.addEventListener("change", onColorChange);
