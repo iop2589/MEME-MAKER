@@ -8,7 +8,7 @@ pipeline {
         }
         stage ('docker build') {
             steps {
-                sh ' docker build --tag  .'
+                sh ' docker build --tag MEME-MAKER .'
             }
         }
         stage ('run docker') {
