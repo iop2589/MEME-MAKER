@@ -6,5 +6,28 @@ pipeline {
                 git credentialsId: 'GitHub-iop2589', url: 'https://github.com/iop2589/MEME-MAKER'
             }
         }
+        stage ('docker build') {
+            steps {
+                sh ' docker build --tag  .'
+            }
+        }
+        stage ('run docker') {
+            steps {
+                sh ' docker run -d -ti --name MEME-MAKER-CI -p 9092:8080 MEME-MAKER'
+            }
+        }
+
+        stage ('check httpd') {
+            steps {
+                sh 'curl -s http://127.0.0.1:9092'
+            }
+        }   
+
+        stage ('rm docker') {
+            steps {
+                sh ' docker rm -f MEME-MAKER-CI'
+            }
+        }
+
     }
 }
