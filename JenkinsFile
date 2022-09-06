@@ -8,12 +8,12 @@ pipeline {
         }
         stage ('docker build') {
             steps {
-                sh ' docker build --tag MEME-MAKER .'
+                sh ' docker build . -t MEME-MAKER'
             }
         }
         stage ('run docker') {
             steps {
-                sh ' docker run -d -ti --name MEME-MAKER-CI -p 9092:8080 MEME-MAKER'
+                sh ' docker run -d -p 9092:8080 --name MEME-MAKER MEME-MAKER:latest '
             }
         }
 
