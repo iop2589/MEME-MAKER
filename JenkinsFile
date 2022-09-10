@@ -13,6 +13,7 @@ pipeline {
         }
         stage ('run docker') {
             steps {
+                sh ' docker rm -f mememakerimg'
                 sh ' docker run -d -p 9092:80 --name mememakerimg mememakerimg:latest '
             }
         }
@@ -21,13 +22,7 @@ pipeline {
             steps {
                 sh 'curl -s http://pschome.iptime.org:9092'
             }
-        }   
-
-        stage ('rm docker') {
-            steps {
-                sh ' docker rm -f mememakerimg'
-            }
-        }
+        }  
 
     }
 }
