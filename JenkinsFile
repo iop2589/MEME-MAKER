@@ -13,7 +13,7 @@ pipeline {
         }
         stage ('run docker') {
             steps {
-                sh ' docker run -d -p 9092:8080 --name MEME-MAKER MEME-MAKER:latest '
+                sh ' docker run -d -p 9092:8080 --name mememakerimg mememakerimg:latest '
             }
         }
 
@@ -25,7 +25,7 @@ pipeline {
 
         stage ('rm docker') {
             steps {
-                sh ' docker rm -f MEME-MAKER-CI'
+                sh ' docker rm -f mememakerimg'
             }
         }
 
