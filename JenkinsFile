@@ -19,7 +19,7 @@ pipeline {
 
         stage ('check httpd') {
             steps {
-                sh 'curl -s http://127.0.0.1:9092'
+                sh 'curl -s http://pschome.iptime.org:9092'
             }
         }   
 
