@@ -8,7 +8,7 @@ pipeline {
         }
         stage ('docker build') {
             steps {
-                sh ' docker build . -t mememakerimg'
+                sh ' docker build . -t mememakerimg --config=release'
             }
         }
         stage ('run docker') {
