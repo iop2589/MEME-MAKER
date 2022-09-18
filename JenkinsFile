@@ -8,7 +8,7 @@ pipeline {
         }
         stage ('docker build') {
             steps {
-                sh ' sudo docker build . -t mememakerimg'
+                sh ' docker build . -t mememakerimg'
             }
         }
         stage ('run docker') {
